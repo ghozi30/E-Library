@@ -62,10 +62,10 @@ test('models have proper guarded property and relations', function () {
 test('all required livewire routes return successful response', function () {
     $book = Book::first();
 
-    $this->get('/')->assertOk()->assertSee('Halaman Katalog Buku');
-    $this->get('/login')->assertOk()->assertSee('Halaman Login');
-    $this->get('/register')->assertOk()->assertSee('Halaman Register');
-    $this->get('/books/'.$book->id)->assertOk()->assertSee('Halaman Detail Buku');
+    $this->get('/')->assertOk()->assertSee('Katalog');
+    $this->get('/login')->assertOk()->assertSee('Masuk');
+    $this->get('/register')->assertOk()->assertSee('Registrasi');
+    $this->get('/books/'.$book->id)->assertOk()->assertSee($book->title);
     $this->get('/books/'.$book->id.'/action')->assertOk()->assertSee('Halaman Aksi Buku');
     $this->get('/my-bookmarks')->assertOk()->assertSee('Halaman Buku Favorit');
     $this->get('/my-borrowings')->assertOk()->assertSee('Halaman Pinjaman Saya');
