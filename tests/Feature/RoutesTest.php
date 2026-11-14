@@ -35,6 +35,14 @@ test('public and visitor routes can be rendered', function (string $url) {
     '/books/1/action',
     '/my-bookmarks',
     '/my-borrowings',
+]);
+
+test('admin routes can be rendered by admin', function (string $url) {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $response = $this->actingAs($admin)->get($url);
+
+    $response->assertStatus(200);
+})->with([
     '/admin/dashboard',
     '/admin/categories',
     '/admin/books',
