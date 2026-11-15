@@ -68,7 +68,7 @@
             <div class="flex items-center justify-between h-16">
                 <!-- Logo & Brand -->
                 <div class="flex items-center gap-4 sm:gap-6">
-                    <a href="/" wire:navigate class="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] focus-visible:ring-offset-2 rounded-lg">
+                    <a href="/" wire:navigate.hover class="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] focus-visible:ring-offset-2 rounded-lg">
                         <div class="w-9 h-9 rounded-lg bg-[#114B43] flex items-center justify-center text-[#FAF8F4] group-hover:bg-[#0C3832] transition-colors duration-200 shrink-0">
                             <svg class="w-5 h-5" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
@@ -83,33 +83,33 @@
                     <!-- Desktop Navigation Links (Layar Lebar xl: >= 1280px) -->
                     <nav class="hidden xl:flex items-center gap-1 border-l border-[#E5E0D8] pl-5 whitespace-nowrap" aria-label="Navigasi Utama">
                         <!-- Semua Pengunjung -->
-                        <a href="/" wire:navigate class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('/') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
+                        <a href="/" wire:navigate.hover class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('/') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
                             Katalog Buku
                         </a>
 
                         @auth
                             <!-- Menu Khusus Siswa -->
                             @if(auth()->user()->role === 'siswa')
-                                <a href="/my-borrowings" wire:navigate class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('my-borrowings*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
+                                <a href="/my-borrowings" wire:navigate.hover class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('my-borrowings*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
                                     Pinjaman Saya
                                 </a>
-                                <a href="/my-bookmarks" wire:navigate class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('my-bookmarks*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
+                                <a href="/my-bookmarks" wire:navigate.hover class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('my-bookmarks*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
                                     Buku Favorit
                                 </a>
                             @endif
 
                             <!-- Menu Khusus Admin -->
                             @if(auth()->user()->role === 'admin')
-                                <a href="/admin/dashboard" wire:navigate class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('admin/dashboard*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
+                                <a href="/admin/dashboard" wire:navigate.hover class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('admin/dashboard*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
                                     Dashboard Admin
                                 </a>
-                                <a href="/admin/categories" wire:navigate class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('admin/categories*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
+                                <a href="/admin/categories" wire:navigate.hover class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('admin/categories*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
                                     Kelola Rak
                                 </a>
-                                <a href="/admin/books" wire:navigate class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('admin/books*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
+                                <a href="/admin/books" wire:navigate.hover class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('admin/books*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
                                     Kelola Buku
                                 </a>
-                                <a href="/admin/borrowings" wire:navigate class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('admin/borrowings*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
+                                <a href="/admin/borrowings" wire:navigate.hover class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#114B43] {{ request()->is('admin/borrowings*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:text-[#181615] hover:bg-[#EFECE4]/80' }}">
                                     Data Peminjaman
                                 </a>
                             @endif
@@ -120,10 +120,10 @@
                 <!-- Right Navbar: Auth / Guest Controls (Desktop xl: >= 1280px) -->
                 <div class="hidden xl:flex items-center gap-3 shrink-0">
                     @guest
-                        <a href="/login" wire:navigate class="px-3.5 py-2 text-sm font-medium text-[#5E5850] hover:text-[#181615] transition-colors">
+                        <a href="/login" wire:navigate.hover class="px-3.5 py-2 text-sm font-medium text-[#5E5850] hover:text-[#181615] transition-colors">
                             Masuk
                         </a>
-                        <a href="/register" wire:navigate class="px-4 py-2 text-sm font-semibold text-[#FAF8F4] bg-[#114B43] hover:bg-[#0C3832] rounded-lg transition-colors">
+                        <a href="/register" wire:navigate.hover class="px-4 py-2 text-sm font-semibold text-[#FAF8F4] bg-[#114B43] hover:bg-[#0C3832] rounded-lg transition-colors">
                             Daftar
                         </a>
                     @else
@@ -180,31 +180,31 @@
             x-transition:leave-end="opacity-0 -translate-y-1"
             class="xl:hidden absolute inset-x-0 top-full z-40 border-y border-[#E5E0D8] bg-[#FAF8F4] px-4 pt-2 pb-5 space-y-1 shadow-xl max-h-[calc(100dvh-4rem)] overflow-y-auto"
         >
-            <a href="/" wire:navigate @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('/') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
+            <a href="/" wire:navigate.hover @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('/') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
                 Katalog Buku
             </a>
 
             @auth
                 @if(auth()->user()->role === 'siswa')
-                    <a href="/my-borrowings" wire:navigate @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('my-borrowings*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
+                    <a href="/my-borrowings" wire:navigate.hover @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('my-borrowings*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
                         Pinjaman Saya
                     </a>
-                    <a href="/my-bookmarks" wire:navigate @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('my-bookmarks*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
+                    <a href="/my-bookmarks" wire:navigate.hover @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('my-bookmarks*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
                         Buku Favorit
                     </a>
                 @endif
 
                 @if(auth()->user()->role === 'admin')
-                    <a href="/admin/dashboard" wire:navigate @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('admin/dashboard*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
+                    <a href="/admin/dashboard" wire:navigate.hover @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('admin/dashboard*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
                         Dashboard Admin
                     </a>
-                    <a href="/admin/categories" wire:navigate @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('admin/categories*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
+                    <a href="/admin/categories" wire:navigate.hover @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('admin/categories*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
                         Kelola Rak
                     </a>
-                    <a href="/admin/books" wire:navigate @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('admin/books*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
+                    <a href="/admin/books" wire:navigate.hover @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('admin/books*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
                         Kelola Buku
                     </a>
-                    <a href="/admin/borrowings" wire:navigate @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('admin/borrowings*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
+                    <a href="/admin/borrowings" wire:navigate.hover @click="mobileMenuOpen = false" class="block px-3 py-2.5 rounded-lg text-base font-medium {{ request()->is('admin/borrowings*') ? 'bg-[#114B43]/10 text-[#114B43] font-semibold' : 'text-[#5E5850] hover:bg-[#EFECE4]' }}">
                         Data Peminjaman
                     </a>
                 @endif

@@ -147,9 +147,13 @@ new #[Title('Katalog Buku - E-Library Sekolah')] class extends Component
     #[Computed]
     public function catalogSummary(): array
     {
+        $bookStats = Book::query()
+            ->selectRaw('COUNT(*) as titles, COALESCE(SUM(stock), 0) as stock')
+            ->first();
+
         return [
-            'titles' => Book::count(),
-            'stock' => (int) Book::sum('stock'),
+            'titles' => (int) ($bookStats?->titles ?? 0),
+            'stock' => (int) ($bookStats?->stock ?? 0),
             'categories' => Category::count(),
         ];
     }
@@ -185,12 +189,15 @@ new #[Title('Katalog Buku - E-Library Sekolah')] class extends Component
         $user = auth()->user();
 
         if ($user->isAdmin()) {
+            $stats = Borrowing::query()
+                ->where('status', 'dipinjam')
+                ->selectRaw('COUNT(*) as active_loans, SUM(CASE WHEN due_date < ? THEN 1 ELSE 0 END) as overdue_loans', [now()->toDateString()])
+                ->first();
+
             return [
                 'role' => 'admin',
-                'active_loans' => Borrowing::where('status', 'dipinjam')->count(),
-                'overdue_loans' => Borrowing::where('status', 'dipinjam')
-                    ->whereDate('due_date', '<', now()->toDateString())
-                    ->count(),
+                'active_loans' => (int) ($stats?->active_loans ?? 0),
+                'overdue_loans' => (int) ($stats?->overdue_loans ?? 0),
             ];
         }
 

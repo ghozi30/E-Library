@@ -134,28 +134,61 @@ new #[Title('Dashboard Admin - E-Library Sekolah')] class extends Component
         ];
     }
 
+    /**
+     * @return array{titles: int, stock: int, out_of_stock: int}
+     */
+    #[Computed]
+    public function bookAggregateSnapshot(): array
+    {
+        $row = Book::query()
+            ->selectRaw('COUNT(*) as titles, COALESCE(SUM(stock), 0) as stock, SUM(CASE WHEN stock <= 0 THEN 1 ELSE 0 END) as out_of_stock')
+            ->first();
+
+        return [
+            'titles' => (int) ($row?->titles ?? 0),
+            'stock' => (int) ($row?->stock ?? 0),
+            'out_of_stock' => (int) ($row?->out_of_stock ?? 0),
+        ];
+    }
+
+    /**
+     * @return array{borrowed: int, returned: int}
+     */
+    #[Computed]
+    public function borrowingAggregateSnapshot(): array
+    {
+        $row = Borrowing::query()
+            ->selectRaw("SUM(CASE WHEN status = 'dipinjam' THEN 1 ELSE 0 END) as borrowed, SUM(CASE WHEN status = 'dikembalikan' THEN 1 ELSE 0 END) as returned")
+            ->first();
+
+        return [
+            'borrowed' => (int) ($row?->borrowed ?? 0),
+            'returned' => (int) ($row?->returned ?? 0),
+        ];
+    }
+
     #[Computed]
     public function totalBookTitles(): int
     {
-        return Book::count();
+        return $this->bookAggregateSnapshot['titles'];
     }
 
     #[Computed]
     public function totalStock(): int
     {
-        return (int) Book::sum('stock');
+        return $this->bookAggregateSnapshot['stock'];
     }
 
     #[Computed]
     public function borrowedBooksCount(): int
     {
-        return Borrowing::where('status', 'dipinjam')->count();
+        return $this->borrowingAggregateSnapshot['borrowed'];
     }
 
     #[Computed]
     public function returnedBooksCount(): int
     {
-        return Borrowing::where('status', 'dikembalikan')->count();
+        return $this->borrowingAggregateSnapshot['returned'];
     }
 
     #[Computed]
@@ -173,7 +206,7 @@ new #[Title('Dashboard Admin - E-Library Sekolah')] class extends Component
     #[Computed]
     public function outOfStockCount(): int
     {
-        return Book::where('stock', '<=', 0)->count();
+        return $this->bookAggregateSnapshot['out_of_stock'];
     }
 
     /**
